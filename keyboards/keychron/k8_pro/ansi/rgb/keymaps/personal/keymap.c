@@ -18,11 +18,15 @@
 
 // clang-format off
 enum layers{
-    QWERTY, // QWERTY_BASE
-    FN,     // FN_LAYER
-    OPTION, // OPTION_LAYER
-    DEBUG   // DEBUG_LAYER
+    QWERTY,     // QWERTY_BASE
+    COLEMAK,    // COLEMAK_BASE
+    FN,         // FN_LAYER
+    OPTION,     // OPTION_LAYER
+    DEBUG       // DEBUG_LAYER
 };
+
+const uint16_t DFQWERTY =   DF(QWERTY);
+const uint16_t DFCOLEMAK =  DF(COLEMAK);
 
 const uint16_t ESC_CTL = LCTL_T(KC_ESC);
 
@@ -35,6 +39,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_LSFT,            KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,             KC_RSFT,             KC_UP,
      KC_LCTL,  KC_LGUI,  KC_LALT,                                KC_SPC,                                 KC_RALT, MO(OPTION), MO(FN),   KC_RCTL,  KC_LEFT,   KC_DOWN,  KC_RGHT),
 
+[COLEMAK] = LAYOUT_tkl_ansi(
+     KC_ESC,   KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,              KC_PSCR,   KC_MUTE,  RGB_TOG,
+     KC_GRV,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_MINS,  KC_EQL,    KC_BSPC,  KC_INS,    KC_HOME,  KC_PGUP,
+     KC_TAB,   KC_Q,     KC_W,     KC_F,     KC_P,     KC_B,     KC_J,     KC_L,     KC_U,     KC_Y,     KC_SCLN,  KC_LBRC,  KC_RBRC,   KC_BSLS,  KC_DEL,    KC_END,   KC_PGDN,
+     ESC_CTL,  KC_A,     KC_R,     KC_S,     KC_T,     KC_G,     KC_M,     KC_N,     KC_E,     KC_I,     KC_O,     KC_QUOT,             KC_ENT,
+     KC_LSFT,            KC_Z,     KC_X,     KC_C,     KC_D,     KC_V,     KC_K,     KC_H,     KC_COMM,  KC_DOT,   KC_SLSH,             KC_RSFT,             KC_UP,
+     KC_LCTL,  KC_LGUI,  KC_LALT,                                KC_SPC,                                 KC_RALT, MO(OPTION), MO(FN),   KC_RCTL,  KC_LEFT,   KC_DOWN,  KC_RGHT),
+
 [FN] = LAYOUT_tkl_ansi(
      KC_TRNS,  KC_BRID,  KC_BRIU,  KC_TASK,  KC_FILE,  RGB_VAD,  RGB_VAI,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,  KC_VOLU,            KC_TRNS,  KC_TRNS,  KC_TRNS,
      KC_TRNS,  BT_HST1,  BT_HST2,  BT_HST3,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,
@@ -44,7 +56,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_TRNS,  KC_TRNS,  KC_TRNS,                                KC_TRNS,                                KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS),
 
 [OPTION] = LAYOUT_tkl_ansi(
-     KC_TRNS, TG(DEBUG), KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,            KC_TRNS,  KC_TRNS,  KC_TRNS,
+     KC_TRNS, TG(DEBUG), KC_TRNS,  KC_TRNS,  KC_TRNS, DFQWERTY, DFCOLEMAK, KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,            KC_TRNS,  KC_TRNS,  KC_TRNS,
      KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,
      KC_TRNS,  KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,
      KC_TRNS,  KC_1,     KC_2,     KC_3,     KC_4,     KC_0,     KC_LEFT,  KC_DOWN,  KC_UP,    KC_RIGHT, KC_TRNS,  KC_TRNS,            KC_TRNS,
@@ -52,7 +64,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_TRNS,  KC_TRNS,  KC_TRNS,                                KC_TRNS,                                KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS),
 
 [DEBUG] = LAYOUT_tkl_ansi(
-     KC_TRNS, TG(DEBUG),  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,            KC_TRNS,  KC_TRNS,  KC_TRNS,
+     KC_TRNS, TG(DEBUG), KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,            KC_TRNS,  KC_TRNS,  KC_TRNS,
      KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  DT_PRNT,  DT_UP,    DT_DOWN,
      KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  QK_MAKE, QK_REBOOT, DB_TOGG,
      KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,            KC_TRNS,
@@ -60,6 +72,37 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_TRNS,  KC_TRNS,  KC_TRNS,                                KC_TRNS,                                KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS)
 
 };
+
+// RGB indicator
+// For now, change the layer of the 9-key cluster to Green (FN), Blue (OPTION) and Red (DEBUG)
+
+bool is_9_key_cluster(uint8_t led_index){
+    return (13 <= led_index && led_index <= 15) || (30 <= led_index && led_index <= 32)
+        || (47 <= led_index && led_index <= 49);
+}
+
+bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+    // Layer indicators
+    for (uint8_t i = led_min; i < led_max; i++) {
+        switch(get_highest_layer( layer_state | default_layer_state )) {
+            case DEBUG:
+                if (is_9_key_cluster(i)) rgb_matrix_set_color(i, RGB_RED);
+                break;
+            case OPTION:
+                if (is_9_key_cluster(i)) rgb_matrix_set_color(i, RGB_BLUE);
+                break;
+            case FN:
+                if (is_9_key_cluster(i)) rgb_matrix_set_color(i, RGB_GREEN);
+                break;
+            case COLEMAK:
+                if (is_9_key_cluster(i)) rgb_matrix_set_color(i, RGB_YELLOW);
+                break;
+            default:
+                break;
+        }
+    }
+    return false;
+}
 
 /*
  * Define the layers to be QWERTY_BASE, (COLEMAK_BASE), FN_LAYER, OPTION_LAYER, DEBUG_LAYER
