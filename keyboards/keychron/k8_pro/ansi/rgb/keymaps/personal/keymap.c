@@ -73,6 +73,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 };
 
+// Set tapping term for ESC_CTL
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case ESC_CTL:
+            return 50;
+        default:
+            return TAPPING_TERM;
+    }
+}
+
 // RGB indicator
 // For now, change the layer of the 9-key cluster to Green (FN), Blue (OPTION) and Red (DEBUG)
 
