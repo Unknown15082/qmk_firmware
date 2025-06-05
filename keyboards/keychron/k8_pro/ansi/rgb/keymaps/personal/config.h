@@ -9,3 +9,6 @@
 
 // Enable Caps Word on both shifts
 #define BOTH_SHIFTS_TURNS_ON_CAPS_WORD
+
+// Enable PERMISSIVE_HOLD for better hold behaviour
+#define PERMISSIVE_HOLD
