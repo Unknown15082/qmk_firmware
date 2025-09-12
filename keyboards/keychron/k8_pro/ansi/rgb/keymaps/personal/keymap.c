@@ -27,8 +27,8 @@ enum layers{
 };
 
 const uint16_t TO_QWER  =  DF(QWERTY);
-const uint16_t TO_CLM =  DF(COLEMAK);
-const uint16_t TO_CNR  =  DF(CANARY);
+const uint16_t TO_CLM   =  DF(COLEMAK);
+const uint16_t TO_CNR   =  DF(CANARY);
 
 const uint16_t ESC_CTL = LCTL_T(KC_ESC);
 
@@ -106,19 +106,19 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     for (uint8_t i = led_min; i < led_max; i++) {
         switch(get_highest_layer( layer_state | default_layer_state )) {
             case DEBUG:
-                if (is_9_key_cluster(i)) rgb_matrix_set_color(i, RGB_RED);
+                rgb_matrix_set_color(i, RGB_RED);
                 break;
             case OPTION:
-                if (is_9_key_cluster(i)) rgb_matrix_set_color(i, RGB_BLUE);
+                rgb_matrix_set_color(i, RGB_BLUE);
                 break;
             case FN:
-                if (is_9_key_cluster(i)) rgb_matrix_set_color(i, RGB_GREEN);
+                rgb_matrix_set_color(i, RGB_GREEN);
                 break;
             case COLEMAK:
-                if (is_9_key_cluster(i)) rgb_matrix_set_color(i, RGB_YELLOW);
+                rgb_matrix_set_color(i, RGB_YELLOW);
                 break;
             case CANARY:
-                if (is_9_key_cluster(i)) rgb_matrix_set_color(i, RGB_TEAL);
+                rgb_matrix_set_color(i, RGB_TEAL);
             default:
                 break;
         }
