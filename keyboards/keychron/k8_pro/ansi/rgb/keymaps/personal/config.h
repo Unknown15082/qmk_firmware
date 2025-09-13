@@ -12,3 +12,6 @@
 
 // Enable PERMISSIVE_HOLD for better hold behaviour
 #define PERMISSIVE_HOLD
+
+// Send string delay to avoid programs messing up inputs
+#define TAP_CODE_DELAY 5

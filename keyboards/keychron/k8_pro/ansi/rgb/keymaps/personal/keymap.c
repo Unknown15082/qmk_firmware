@@ -17,13 +17,20 @@
 #include QMK_KEYBOARD_H
 
 // clang-format off
-enum layers{
+enum layers {
     QWERTY,     // QWERTY_BASE
     COLEMAK,    // COLEMAK_BASE
     CANARY,     // CANARY_BASE
     FN,         // FN_LAYER
     OPTION,     // OPTION_LAYER
+    SYMBOL,     // SYMBOL_LAYER
     DEBUG       // DEBUG_LAYER
+};
+
+// clang-format off
+enum custom_keycodes {
+    UP_DIR = SAFE_RANGE,
+    NAMESPC,
 };
 
 const uint16_t TO_QWER  =  DF(QWERTY);
@@ -38,7 +45,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_GRV,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_MINS,  KC_EQL,    KC_BSPC,  KC_INS,    KC_HOME,  KC_PGUP,
      KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_LBRC,  KC_RBRC,   KC_BSLS,  KC_DEL,    KC_END,   KC_PGDN,
      ESC_CTL,  KC_A,     KC_S,     KC_D,     KC_F,     KC_G,     KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  KC_QUOT,             KC_ENT,
-     KC_LSFT,            KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,             KC_RSFT,             KC_UP,
+     KC_LSFT,            KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,           MO(SYMBOL),            KC_UP,
      KC_LCTL,  KC_LGUI,  KC_LALT,                                KC_SPC,                                 KC_RALT, MO(OPTION), MO(FN),   KC_RCTL,  KC_LEFT,   KC_DOWN,  KC_RGHT),
 
 [COLEMAK] = LAYOUT_tkl_ansi(
@@ -46,7 +53,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_GRV,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_MINS,  KC_EQL,    KC_BSPC,  KC_INS,    KC_HOME,  KC_PGUP,
      KC_TAB,   KC_Q,     KC_W,     KC_F,     KC_P,     KC_B,     KC_J,     KC_L,     KC_U,     KC_Y,     KC_SCLN,  KC_LBRC,  KC_RBRC,   KC_BSLS,  KC_DEL,    KC_END,   KC_PGDN,
      ESC_CTL,  KC_A,     KC_R,     KC_S,     KC_T,     KC_G,     KC_M,     KC_N,     KC_E,     KC_I,     KC_O,     KC_QUOT,             KC_ENT,
-     KC_LSFT,            KC_X,     KC_C,     KC_D,     KC_V,     KC_Z,     KC_K,     KC_H,     KC_COMM,  KC_DOT,   KC_SLSH,             KC_RSFT,             KC_UP,
+     KC_LSFT,            KC_X,     KC_C,     KC_D,     KC_V,     KC_Z,     KC_K,     KC_H,     KC_COMM,  KC_DOT,   KC_SLSH,           MO(SYMBOL),            KC_UP,
      KC_LCTL,  KC_LGUI,  KC_LALT,                                KC_SPC,                                 KC_RALT, MO(OPTION), MO(FN),   KC_RCTL,  KC_LEFT,   KC_DOWN,  KC_RGHT),
 
 [CANARY] = LAYOUT_tkl_ansi(
@@ -54,7 +61,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_GRV,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_MINS,  KC_EQL,    KC_BSPC,  KC_INS,    KC_HOME,  KC_PGUP,
      KC_TAB,   KC_W,     KC_L,     KC_Y,     KC_P,     KC_K,     KC_Z,     KC_X,     KC_O,     KC_U,     KC_SCLN,  KC_LBRC,  KC_RBRC,   KC_BSLS,  KC_DEL,    KC_END,   KC_PGDN,
      ESC_CTL,  KC_C,     KC_R,     KC_S,     KC_T,     KC_B,     KC_F,     KC_N,     KC_E,     KC_I,     KC_A,     KC_QUOT,             KC_ENT,
-     KC_LSFT,            KC_J,     KC_V,     KC_D,     KC_G,     KC_Q,     KC_M,     KC_H,     KC_COMM,  KC_DOT,   KC_SLSH,             KC_RSFT,             KC_UP,
+     KC_LSFT,            KC_J,     KC_V,     KC_D,     KC_G,     KC_Q,     KC_M,     KC_H,     KC_COMM,  KC_DOT,   KC_SLSH,           MO(SYMBOL),            KC_UP,
      KC_LCTL,  KC_LGUI,  KC_LALT,                                KC_SPC,                                 KC_RALT, MO(OPTION), MO(FN),   KC_RCTL,  KC_LEFT,   KC_DOWN,  KC_RGHT),
 
 [FN] = LAYOUT_tkl_ansi(
@@ -73,6 +80,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_TRNS,            KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,             KC_TRNS,            KC_TRNS,
      KC_TRNS,  KC_TRNS,  KC_TRNS,                                KC_TRNS,                                KC_TRNS,  KC_TRNS,  KC_TRNS,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS),
 
+[SYMBOL] = LAYOUT_tkl_ansi(
+     KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,             KC_TRNS,  KC_TRNS,  KC_TRNS,
+     KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,
+     KC_TRNS,  KC_TILD,  KC_LABK,  KC_RABK,  KC_MINS,  KC_COLN,  KC_TRNS,  KC_LBRC,  KC_RBRC,  KC_DLR,   KC_TRNS,  KC_TRNS,  KC_TRNS,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,
+     KC_TRNS,  KC_EXLM,  KC_ASTR,  KC_SLSH,  KC_EQL,   KC_PERC,  KC_HASH,  KC_LPRN,  KC_RPRN,  NAMESPC,  KC_TRNS,  KC_TRNS,             KC_TRNS,
+     CW_TOGG,            KC_PLUS,  KC_AT,    KC_AMPR,  KC_PIPE,  UP_DIR,   KC_CIRC,  KC_LCBR,  KC_RCBR,  KC_UNDS,  KC_TRNS,             KC_TRNS,            KC_TRNS,
+     KC_TRNS,  KC_TRNS,  KC_TRNS,                                KC_TRNS,                                KC_TRNS,  KC_TRNS,  KC_TRNS,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS),
+
 [DEBUG] = LAYOUT_tkl_ansi(
      KC_TRNS, TG(DEBUG), KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,             KC_TRNS,  KC_TRNS,  KC_TRNS,
      KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,   KC_TRNS,  DT_PRNT,  DT_UP,    DT_DOWN,
@@ -82,6 +97,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_TRNS,  KC_TRNS,  KC_TRNS,                                KC_TRNS,                                KC_TRNS,  KC_TRNS,  KC_TRNS,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS)
 
 };
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (record->event.pressed) {
+        switch (keycode) {
+            case UP_DIR:
+                SEND_STRING_DELAY("../", TAP_CODE_DELAY);
+                return false;
+            case NAMESPC:
+                SEND_STRING_DELAY("::", TAP_CODE_DELAY);
+                return false;
+            default:
+                return true;
+        }
+    }
+    return true;
+}
 
 // Set tapping term for ESC_CTL
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
@@ -113,6 +144,9 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
                 break;
             case FN:
                 rgb_matrix_set_color(i, RGB_GREEN);
+                break;
+            case SYMBOL:
+                rgb_matrix_set_color(i, RGB_GOLD);
                 break;
             case COLEMAK:
                 rgb_matrix_set_color(i, RGB_YELLOW);
