@@ -19,7 +19,7 @@
 // clang-format off
 enum layers {
     QWERTY,     // QWERTY_BASE
-    COLEMAK,    // COLEMAK_BASE
+    HRM,        // QWERTY_HRM
     CANARY,     // CANARY_BASE
     FN,         // FN_LAYER
     OPTION,     // OPTION_LAYER
@@ -34,10 +34,19 @@ enum custom_keycodes {
 };
 
 const uint16_t TO_QWER  =  DF(QWERTY);
-const uint16_t TO_CLM   =  DF(COLEMAK);
+const uint16_t TO_HRM   =  DF(HRM);
 const uint16_t TO_CNR   =  DF(CANARY);
 
 const uint16_t ESC_CTL = LCTL_T(KC_ESC);
+
+const uint16_t GUI_A = LGUI_T(KC_A);
+const uint16_t ALT_S = LALT_T(KC_S);
+const uint16_t SFT_D = LSFT_T(KC_D);
+const uint16_t CTL_F = LCTL_T(KC_F);
+const uint16_t CTL_J = LCTL_T(KC_J);
+const uint16_t SFT_K = LSFT_T(KC_K);
+const uint16_t ALT_L = LALT_T(KC_L);
+const uint16_t GUISCLN = LGUI_T(KC_SCLN);
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [QWERTY] = LAYOUT_tkl_ansi(
@@ -48,12 +57,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_LSFT,            KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,           MO(SYMBOL),            KC_UP,
      KC_LCTL,  KC_LGUI,  KC_LALT,                                KC_SPC,                                 KC_RALT, MO(OPTION), MO(FN),   KC_RCTL,  KC_LEFT,   KC_DOWN,  KC_RGHT),
 
-[COLEMAK] = LAYOUT_tkl_ansi(
+[HRM] = LAYOUT_tkl_ansi(
      KC_ESC,   KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,              KC_PSCR,   KC_MUTE,  RGB_TOG,
      KC_GRV,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_MINS,  KC_EQL,    KC_BSPC,  KC_INS,    KC_HOME,  KC_PGUP,
-     KC_TAB,   KC_Q,     KC_W,     KC_F,     KC_P,     KC_B,     KC_J,     KC_L,     KC_U,     KC_Y,     KC_SCLN,  KC_LBRC,  KC_RBRC,   KC_BSLS,  KC_DEL,    KC_END,   KC_PGDN,
-     ESC_CTL,  KC_A,     KC_R,     KC_S,     KC_T,     KC_G,     KC_M,     KC_N,     KC_E,     KC_I,     KC_O,     KC_QUOT,             KC_ENT,
-     KC_LSFT,            KC_X,     KC_C,     KC_D,     KC_V,     KC_Z,     KC_K,     KC_H,     KC_COMM,  KC_DOT,   KC_SLSH,           MO(SYMBOL),            KC_UP,
+     KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_LBRC,  KC_RBRC,   KC_BSLS,  KC_DEL,    KC_END,   KC_PGDN,
+     ESC_CTL,  GUI_A,    ALT_S,    SFT_D,    CTL_F,    KC_G,     KC_H,     CTL_J,    SFT_K,    ALT_L,    GUISCLN,  KC_QUOT,             KC_ENT,
+     KC_LSFT,            KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,           MO(SYMBOL),            KC_UP,
      KC_LCTL,  KC_LGUI,  KC_LALT,                                KC_SPC,                                 KC_RALT, MO(OPTION), MO(FN),   KC_RCTL,  KC_LEFT,   KC_DOWN,  KC_RGHT),
 
 [CANARY] = LAYOUT_tkl_ansi(
@@ -73,7 +82,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_TRNS,  KC_TRNS,  KC_TRNS,                                KC_TRNS,                                KC_TRNS,  KC_TRNS,  KC_TRNS,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS),
 
 [OPTION] = LAYOUT_tkl_ansi(
-     KC_TRNS, TG(DEBUG), KC_TRNS,  KC_TRNS,  KC_TRNS,  TO_QWER,  TO_CLM,   TO_CNR,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,             KC_TRNS,  KC_TRNS,  KC_TRNS,
+     KC_TRNS, TG(DEBUG), KC_TRNS,  KC_TRNS,  KC_TRNS,  TO_QWER,  TO_HRM,   TO_CNR,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,             KC_TRNS,  KC_TRNS,  KC_TRNS,
      KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,
      KC_TRNS,  KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,
      KC_TRNS,  KC_1,     KC_2,     KC_3,     KC_4,     KC_0,     KC_LEFT,  KC_DOWN,  KC_UP,    KC_RIGHT, KC_TRNS,  KC_TRNS,             KC_TRNS,
@@ -97,6 +106,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_TRNS,  KC_TRNS,  KC_TRNS,                                KC_TRNS,                                KC_TRNS,  KC_TRNS,  KC_TRNS,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS)
 
 };
+
+// Layout hand-ness for chordal hold
+const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM = LAYOUT_tkl_ansi(
+    '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*',      '*', '*', '*',
+    '*', 'L', 'L', 'L', 'L', 'L', '*', 'R', 'R', 'R', 'R', 'R', 'R', '*', '*', '*', '*',
+    '*', 'L', 'L', 'L', 'L', 'L', '*', 'R', 'R', 'R', 'R', 'R', 'R', '*', '*', '*', '*',
+    '*', 'L', 'L', 'L', 'L', 'L', 'R', 'R', 'R', 'R', 'R', 'R',      '*',
+    '*',      'L', 'L', 'L', 'L', '*', 'R', 'R', 'R', 'R', 'R',      '*',      '*',
+    '*', '*', '*',                '*',                '*', '*', '*', '*', '*', '*', '*'
+);
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (record->event.pressed) {
@@ -148,7 +167,7 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
             case SYMBOL:
                 rgb_matrix_set_color(i, RGB_GOLD);
                 break;
-            case COLEMAK:
+            case HRM:
                 rgb_matrix_set_color(i, RGB_YELLOW);
                 break;
             case CANARY:
@@ -165,6 +184,7 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
  *
  * QWERTY_BASE contains the normal keyboard keys in Qwerty layout.
  * COLEMAK_BASE contains the normal keyboard keys in Colemak-DH layout.
+ * QWERTY_HRM contains the normal keyboard keys in Qwerty layout, with home-row mods.
  * CANARY_BASE contains the normal keyboard keys in Canary layout.
  * FN_LAYER contains F1-F2 functions, RGB colors, Battery level, NKRO, Bluetooth hosts and other keys
  * OPTION_LAYER contains Numpad, mouse emulation, other custom keys, macros and layer-toggling keys
